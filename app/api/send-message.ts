@@ -1,21 +1,21 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import axios from "axios";
+import {NextApiRequest, NextApiResponse} from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        const { message } = req.body; // Extract the message from the request body
+        const { text } = req.body; // Extract the message from the request body
         const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL; // Use environment variable for Slack webhook URL
-            console.log(message, SLACK_WEBHOOK_URL); // Debugging log to ensure variables are correct
+            console.log(text, SLACK_WEBHOOK_URL); // Debugging log to ensure variables are correct
 
         try {
-
             // Make the request to Slack's webhook URL
-            const response = await axios.post(SLACK_WEBHOOK_URL!, {
-                text: message,
-            },{
+            const response = await fetch(SLACK_WEBHOOK_URL, {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }});
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ text
+                }),
+            })
 
             if (response.status === 200) {
                 res.status(200).json({ success: true, message: 'Message sent successfully!' });

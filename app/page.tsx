@@ -1,24 +1,29 @@
 "use client"
-import { useState } from 'react';
-import axios from 'axios';
+import {useState} from 'react';
 
 export default function Home() {
     const [loading, setLoading] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
-    console.log(process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL)
     const sendMessage = async () => {
         setLoading(true);
         try {
             // Correct API route path
-            const response = await axios.post('api/send-message', {
-                message: 'Hello from Next.js!',
-            },{
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }}
-            );
+            await fetch('api/send-message', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    text: 'Hello from Next.js!',
+                }),
+            });
 
-            setResponseMessage(response.data.message);
+            // const response = await axios.post('api/send-message', {
+            //     text: 'Hello from Next.js!',
+            // },
+            // );
+
+            // setResponseMessage(response.data.message);
         } catch (error) {
             setResponseMessage('Error sending message to Slack.');
             console.error('Error:', error);
