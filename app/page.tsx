@@ -5,14 +5,15 @@ import axios from 'axios';
 export default function Home() {
     const [loading, setLoading] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
-
+    // console.log(process.env.NEXT_PUBLIC_SLACK_WEBHOOK_URL)
     const sendMessage = async () => {
         setLoading(true);
         try {
             // Correct API route path
-            const response = await axios.post('/api/sendMessage', {
+            const response = await axios.post('api/send-message', {
                 message: 'Hello from Next.js!',
-            });
+            }
+                );
 
             setResponseMessage(response.data.message);
         } catch (error) {
