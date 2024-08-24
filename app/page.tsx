@@ -7,9 +7,9 @@ import {Button} from "@/components/ui/button"
 import {toast} from "sonner";
 
 export default function Home() {
-    const [loading, setLoading] = useState(false);
-    const [responseMessage, setResponseMessage] = useState('');
-    const [message, setMessage] = useState('');
+    const [loading, setLoading] =  useState<boolean>(false);
+    const [responseMessage, setResponseMessage] =  useState<string>('');
+    const [message, setMessage] = useState<string>('');
 
     const sendMessage = async () => {
         setLoading(true);
