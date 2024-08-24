@@ -14,7 +14,7 @@ export default function Home() {
                 message: 'Hello from Next.js!',
             },{
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/x-www-form-urlencoded'
                     }}
             );
 
