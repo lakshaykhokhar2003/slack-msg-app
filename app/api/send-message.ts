@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    console.log(req.method, req.body); // Debugging log to ensure request method and body are correct
     if (req.method === 'POST') {
         const { message } = req.body; // Extract the message from the request body
         const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL; // Use environment variable for Slack webhook URL
